@@ -1,0 +1,10 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.rootReact{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+}

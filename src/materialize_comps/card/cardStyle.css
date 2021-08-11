@@ -1,0 +1,14 @@
+.card{
+    border-radius: 10px;
+    margin: 20px;
+    width: 250px;
+    height: 250px;
+    display: block;
+    overflow: hidden;
+}
+
+.card p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

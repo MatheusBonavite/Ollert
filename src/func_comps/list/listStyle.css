@@ -1,0 +1,13 @@
+.cards_parent{
+    display: flex;
+    align-items: flex-start;
+    margin: 20px;
+}
+
+.list{
+    min-width: 250px !important;
+}
+
+.card_adder{
+    cursor: pointer;
+}

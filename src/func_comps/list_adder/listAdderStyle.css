@@ -1,0 +1,26 @@
+.get_list_name{
+    display: flex;
+    align-items: flex-start;
+    border-radius: 10px;
+    margin: 20px;
+    margin-top: 27px;
+    max-width: 250px;
+    max-height: 250px;
+    overflow: hidden;
+}
+
+.get_list_name input[type="text"]:focus {
+    border-bottom: 5px solid #d8f1fa !important;
+}
+
+.get_list_name input[type="text"]:hover {
+    border-bottom: 3px solid #d8f1fa !important;
+}
+
+.material-icons{
+    margin-top: 30px;
+    max-width: 3rem;
+    max-height: 3rem;
+    cursor: pointer;
+    color: #1ac0ea;
+}
