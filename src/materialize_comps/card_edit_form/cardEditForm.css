@@ -1,0 +1,20 @@
+.datepicker-modal {
+    max-width: 650px;
+    width: 650px;
+    color: #1ac0ea;
+}
+div.datepicker-date-display{
+    background-color: #1ac0ea;
+}
+.datepicker-table td.is-selected {
+    background-color: #1ac0ea;
+    color: #fff;
+}
+
+input[type='range'] + .thumb{
+    background-color: #1ac0ea;
+}
+
+#submit_form{
+    background-color: #1ac0ea;
+}

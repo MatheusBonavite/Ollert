@@ -1,0 +1,12 @@
+.see-modal-content{
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.see-modal-title{
+    margin: 10px;
+}
+.see-modal-description{
+    flex-basis:100%;
+    text-align: center;
+}

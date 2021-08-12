@@ -3,12 +3,23 @@
     margin: 20px;
     width: 250px;
     height: 250px;
-    display: block;
     overflow: hidden;
 }
 
-.card p{
+.card-content{
+    display:flex;
+    flex-wrap: wrap;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.modal-trigger{
+    float: right;
+    align-self: flex-end;
+}
+
+.deadline-range{
+    float: left;
+    align-self: flex-end;
 }
