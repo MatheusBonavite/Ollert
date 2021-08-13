@@ -9,46 +9,50 @@ import "./listStyle.css";
 import MCard from "../../materialize_comps/card/MCard";
 
 var cardCounterCache = cardCounter();
-function cardCounter(){
+function cardCounter() {
     let cardCounter = 0;
-    return function(){
+    return function () {
         cardCounter++;
         return cardCounter;
-    }
+    };
 }
 
-const List = React.memo(
-    ({ listTitle }) => {
-        const [cardItems, setCardItems] = useState([]);
-    
-        return (
-            <div className="cards_parent list">
-                <div id="card-list" className="list">
-                    <div>
-                        <p>{listTitle}</p>
-                        <hr />
-                        {cardItems?.length != 0 &&
-                            cardItems.map((v) => {
-                                return <MCard listParent={listTitle} cardKey={v} key={v}></MCard>;
-                            })}
-                    </div>
-                    <div>
-                        <a
-                            id="card_adder"
-                            onClick={() => {
-                                setCardItems([...cardItems, cardCounterCache()]);
-                            }}
-                        >
-                            <span>
-                                <i className="material-icons">add</i>
-                            </span>
-                            Add Card!
-                        </a>
-                    </div>
+const List = React.memo(({ listTitle }) => {
+    const [cardItems, setCardItems] = useState([]);
+
+    return (
+        <div className="cards_parent list">
+            <div id="card-list" className="list">
+                <div>
+                    <p>{listTitle}</p>
+                    <hr />
+                    {cardItems?.length != 0 &&
+                        cardItems.map((v) => {
+                            return (
+                                <MCard
+                                    listParent={listTitle}
+                                    cardKey={v}
+                                    key={v}
+                                ></MCard>
+                            );
+                        })}
+                </div>
+                <div>
+                    <a
+                        id="card_adder"
+                        onClick={() => {
+                            setCardItems([...cardItems, cardCounterCache()]);
+                        }}
+                    >
+                        <span>
+                            <i className="material-icons">add</i>
+                        </span>
+                        Add Card!
+                    </a>
                 </div>
             </div>
-        );
-    }
-);
+        </div>
+    );
+});
 
 export default List;

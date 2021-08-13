@@ -4,28 +4,23 @@ import { Component } from "react";
 import "./seeModal.css";
 
 class SeeModal extends Component {
-
     componentDidMount() {
         //To access the materialize modal structure!
-        M.Modal.init(
-            document.querySelectorAll(".modal")
-        );
+        M.Modal.init(document.querySelectorAll(".modal"));
     }
 
     render() {
-        const { 
+        const {
             listParent,
             cardKey = 0,
-            title = 'New Card',
+            title = "New Card",
             description = `A Small Description for Card!`,
             fullDescription = `A more complete description, following the card we want!`,
             priority,
             deadline,
             timeEstimated,
-            id
+            id,
         } = this.props;
-
-        
 
         return (
             <div id={id} className="modal">

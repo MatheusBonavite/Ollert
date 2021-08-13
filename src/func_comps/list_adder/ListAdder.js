@@ -16,12 +16,12 @@ const ListAdder = () => {
             console.log(lists);
         }
     }
-    
+
     return (
         <>
             {lists.length
                 ? lists.map((list) => {
-                        return <List key={list} listTitle={list} />;
+                      return <List key={list} listTitle={list} />;
                   })
                 : ""}
             <div className="get_list_name">
@@ -29,8 +29,8 @@ const ListAdder = () => {
                 <i
                     className="material-icons right"
                     onClick={() => {
-                        handleClick()
-                        listTitleCache.add(...lists)
+                        handleClick();
+                        listTitleCache.add(...lists);
                     }}
                 >
                     airplay
