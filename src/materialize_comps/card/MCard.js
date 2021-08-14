@@ -88,23 +88,27 @@ class MCard extends Component {
                         />
                     </div>
                     <div className="card-content">
-                        <span className="content-title activator grey-text text-darken-4">
-                            <div className="card-title">
-                                <p>
-                                    {title + `${cardKey}`}
-                                    <abbs title={`Priority: ${priority}`}>
-                                        <i
-                                            className="material-icons"
-                                            data-target="priority_dropdown"
-                                        >
-                                            {this.priorityMatcher(priority) ||
-                                                "looks_4"}
-                                        </i>
-                                    </abbs>
-                                </p>
-                            </div>
-                        </span>
-                        <p>{description}</p>
+                        <div className="card-title-priority">
+                            <span className="content-title activator grey-text text-darken-4">
+                                <div className="card-title">
+                                    <p className="card-title-priority">
+                                        <abbs title={`Priority: ${priority}`}>
+                                            <i
+                                                className="material-icons"
+                                                data-target="priority_dropdown"
+                                            >
+                                                {this.priorityMatcher(priority) ||
+                                                    "looks_4"}
+                                            </i>
+                                        </abbs>
+                                        {title}
+                                    </p>
+                                </div>
+                            </span>
+                        </div>
+                        <div className="card-title-description">
+                            <p className="card-title-description">{description}</p>
+                        </div>
 
                         {/* Watch Modal Trigger*/}
                         <abbr className="modal-trigger-abbr" title="More info!">

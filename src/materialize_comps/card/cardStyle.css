@@ -14,6 +14,20 @@
     text-overflow: ellipsis;
 }
 
+.card-title-priority {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+}
+
+.card-title-description{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+}
+
 .modal-trigger{
     float: right;
     align-self: flex-end;

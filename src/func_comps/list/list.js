@@ -11,16 +11,29 @@ import useGetCards from "../../custom_hooks/useGetCards"
 
 var cardCounterCache = cardCounter();
 function cardCounter() {
-    let cardCounter = 0;
+    let cardId = '';
+    let keeper = [];
     return function () {
-        cardCounter++;
-        return cardCounter;
+        let aux = (Math.random() + 1).toString(36).substring(2);
+        while(keeper.find(value => value == aux)){
+            aux = (Math.random() + 1).toString(36).substring(2);
+        }
+        keeper.push(aux);
+        cardId = aux;
+        return cardId;
     };
 }
 
 const List = React.memo(({ listTitle, cardIds }) => {
     const [cardItems, setCardItems] = useState([]);
     const storageCards = [];
+
+    function removeCard(cardKey){
+        setCardItems(
+            cardItems.filter(cardId => cardId != cardKey)
+        )
+    }
+
     cardIds?.length && cardIds.forEach(cardId =>{
         cardCounterCache();
         const [cardFromStorage] = useGetCards(cardId, listTitle);
@@ -41,6 +54,13 @@ const List = React.memo(({ listTitle, cardIds }) => {
                                     listParent={v?.listParent}
                                     cardKey={v?.cardKey}
                                     key={v?.cardKey}
+                                    title={v?.title}
+                                    deadline={v?.deadline}
+                                    description={v?.description}
+                                    fullDescription={v?.fullDescription}
+                                    priority={v?.priority}
+                                    timeEstimated={v?.timeEstimated}
+                                    removable={removeCard}
                                 ></MCard>
                             );
                         })
@@ -53,6 +73,7 @@ const List = React.memo(({ listTitle, cardIds }) => {
                                     listParent={listTitle}
                                     cardKey={v}
                                     key={v}
+                                    removable={removeCard}
                                 ></MCard>
                             );
                         })
