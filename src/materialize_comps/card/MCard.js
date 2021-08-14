@@ -50,6 +50,7 @@ class MCard extends Component {
     }
 
     handleCardState(props) {
+        console.log('Who are props >', props);
         let newState = {
             title: props.title,
             description: props.description,
@@ -90,7 +91,7 @@ class MCard extends Component {
                         <span className="content-title activator grey-text text-darken-4">
                             <div className="card-title">
                                 <p>
-                                    {title}
+                                    {title + `${cardKey}`}
                                     <abbs title={`Priority: ${priority}`}>
                                         <i
                                             className="material-icons"
@@ -116,14 +117,12 @@ class MCard extends Component {
                         {/* End of Watch Modal Trigger*/}
 
                         {/* Edit Modal Trigger*/}
-                        <abbr
-                            className="modal-trigger-abbr"
-                            title="Edit card info!"
-                        >
-                            <a className="modal-trigger" href="#editInfo">
-                                <span className="material-icons pin">edit</span>
-                            </a>
-                        </abbr>
+                        <EditModal
+                            id={"editInfo"}
+                            cardHandler={this.handleCardState.bind(this)}
+                            listParent={listParent}
+                            cardKey={cardKey}
+                        />
                         {/* End of Edit Modal Trigger*/}
 
                         <abbr
@@ -143,12 +142,6 @@ class MCard extends Component {
                         </abbr>
                     </div>
                     <SeeModal id={"getInfo"} />
-                    <EditModal
-                        id={"editInfo"}
-                        cardHandler={this.handleCardState.bind(this)}
-                        listParent={listParent}
-                        cardKey={cardKey}
-                    />
                 </div>
             </>
         );

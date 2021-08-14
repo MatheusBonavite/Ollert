@@ -15,15 +15,25 @@ class EditModal extends Component {
         const { cardHandler, id, listParent, cardKey } = this.props;
 
         return (
-            <div id={id} className="modal">
-                <div className="see-modal-content">
-                    <CardEditForm
-                        cardHandler={cardHandler}
-                        listParent={listParent}
-                        cardKey={cardKey}
-                    />
+            <>
+                <abbr
+                    className="modal-trigger-abbr"
+                    title="Edit card info!"
+                >
+                    <a className="modal-trigger" href={`#editInfo${cardKey}`}>
+                        <span className="material-icons pin">edit</span>
+                    </a>
+                </abbr>
+                <div id={`editInfo${cardKey}`} className="modal">
+                    <div className="see-modal-content">
+                        <CardEditForm
+                            cardHandler={cardHandler}
+                            listParent={listParent}
+                            cardKey={cardKey}
+                        />
+                    </div>
                 </div>
-            </div>
+            </>
         );
     }
 }

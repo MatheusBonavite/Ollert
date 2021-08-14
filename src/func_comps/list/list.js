@@ -38,7 +38,7 @@ const List = React.memo(({ listTitle, cardIds }) => {
                         storageCards.map((v) => {
                             return (
                                 <MCard
-                                    listParent={v?.listTitle}
+                                    listParent={v?.listParent}
                                     cardKey={v?.cardKey}
                                     key={v?.cardKey}
                                 ></MCard>
