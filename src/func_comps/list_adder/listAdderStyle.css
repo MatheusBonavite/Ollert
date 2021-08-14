@@ -24,3 +24,24 @@
     cursor: pointer;
     color: #1ac0ea;
 }
+
+.loading-screen{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.loadin-screen-title{
+    flex-basis: 100%;
+    text-align: center;
+}
+
+.loadin-screen-title{
+    flex-basis: 100%;
+}
+
+.preloader-wrapper{
+    margin: 30px;
+}

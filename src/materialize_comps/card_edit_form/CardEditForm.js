@@ -28,7 +28,7 @@ class CardEditForm extends Component {
                 deadline: document.getElementById("get_deadline").value,
                 timeEstimated: document.getElementById("to_complete").value,
                 cardKey: this.props.cardKey,
-                listParent: this.props.listParent
+                listParent: this.props.listParent,
             };
             cardHandler(updated_card);
         };

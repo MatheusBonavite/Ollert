@@ -17,7 +17,7 @@ function cardCounter() {
     };
 }
 
-const List = React.memo(({ listTitle }) => {
+const List = React.memo(({ listTitle, cardId }) => {
     const [cardItems, setCardItems] = useState([]);
 
     return (
@@ -26,7 +26,8 @@ const List = React.memo(({ listTitle }) => {
                 <div>
                     <p>{listTitle}</p>
                     <hr />
-                    {cardItems?.length != 0 &&
+                    {
+                        cardItems?.length != 0 &&
                         cardItems.map((v) => {
                             return (
                                 <MCard
@@ -35,7 +36,9 @@ const List = React.memo(({ listTitle }) => {
                                     key={v}
                                 ></MCard>
                             );
-                        })}
+                        })
+                    }
+                    
                 </div>
                 <div>
                     <a

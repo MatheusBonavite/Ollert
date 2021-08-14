@@ -12,12 +12,16 @@ class EditModal extends Component {
     }
 
     render() {
-        const { cardHandler, id,listParent, cardKey } = this.props;
+        const { cardHandler, id, listParent, cardKey } = this.props;
 
         return (
             <div id={id} className="modal">
                 <div className="see-modal-content">
-                    <CardEditForm cardHandler={cardHandler} listParent={listParent} cardKey={cardKey} />
+                    <CardEditForm
+                        cardHandler={cardHandler}
+                        listParent={listParent}
+                        cardKey={cardKey}
+                    />
                 </div>
             </div>
         );

@@ -56,7 +56,7 @@ class MCard extends Component {
             deadline: props.deadline,
             timeEstimated: props.timeEstimated,
             listParent: props.listParent,
-            cardKey: props.cardKey
+            cardKey: props.cardKey,
         };
         this.setState(newState);
         integrateWithLocalForage(props);
@@ -144,8 +144,8 @@ class MCard extends Component {
                     <EditModal
                         id={"editInfo"}
                         cardHandler={this.handleCardState.bind(this)}
-                        listParent = {listParent}
-                        cardKey = {cardKey}
+                        listParent={listParent}
+                        cardKey={cardKey}
                     />
                 </div>
             </>
