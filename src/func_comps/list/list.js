@@ -7,6 +7,7 @@
 import React, { useState } from "react";
 import "./listStyle.css";
 import MCard from "../../materialize_comps/card/MCard";
+import useGetCards from "../../custom_hooks/useGetCards"
 
 var cardCounterCache = cardCounter();
 function cardCounter() {
@@ -17,8 +18,14 @@ function cardCounter() {
     };
 }
 
-const List = React.memo(({ listTitle, cardId }) => {
+const List = React.memo(({ listTitle, cardIds }) => {
     const [cardItems, setCardItems] = useState([]);
+    const storageCards = [];
+    cardIds?.length && cardIds.forEach(cardId =>{
+        cardCounterCache();
+        const [cardFromStorage] = useGetCards(cardId, listTitle);
+        storageCards.push(cardFromStorage);
+    });
 
     return (
         <div className="cards_parent list">
@@ -26,6 +33,18 @@ const List = React.memo(({ listTitle, cardId }) => {
                 <div>
                     <p>{listTitle}</p>
                     <hr />
+                    {
+                        storageCards?.length != 0 &&
+                        storageCards.map((v) => {
+                            return (
+                                <MCard
+                                    listParent={v?.listTitle}
+                                    cardKey={v?.cardKey}
+                                    key={v?.cardKey}
+                                ></MCard>
+                            );
+                        })
+                    }
                     {
                         cardItems?.length != 0 &&
                         cardItems.map((v) => {

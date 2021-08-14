@@ -26,13 +26,15 @@ class MCard extends Component {
     };
 
     componentDidMount() {
-        cardListCache.push({
-            title: this.props.title,
-            description: this.props.description,
-            cardKey: this.props.cardKey,
-            listParent: this.props.listParent,
-        });
-        integrateWithLocalForage(this.props);
+        if(this?.props){
+            cardListCache.push({
+                title: this.props.title,
+                description: this.props.description,
+                cardKey: this.props.cardKey,
+                listParent: this.props.listParent,
+            });
+            integrateWithLocalForage(this.props);
+        }
         console.log("cardsListCache >>> ", cardListCache);
     }
 

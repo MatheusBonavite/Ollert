@@ -11,21 +11,21 @@ const listTitleCache = new Set();
 const ListAdder = () => {
     const [lists, setLists] = useState([]);
     const [listTitle, setListTitle] = useState("");
-    const [gotKeys, status ] = useGetKeys();
+    const [gotKeys, uniqueLists, status ] = useGetKeys();
 
     function handleClick() {
+
         if (listTitle) {
             setLists([...lists, listTitle]);
         }
     }
-    console.log(status, gotKeys);
 
     if (status != "unloaded") {
         return (
             <>
-                {   gotKeys?.length ? gotKeys.map((key) => {
-                            let [list, cardId] = [key.split("+")[0], key.split("+")[1]];
-                            return <List key={list} listTitle={list} cardId={cardId}/>;
+                {   uniqueLists?.length ? uniqueLists.map((list) => {
+                            let cardIds = gotKeys.filter(key => key.split("+")[0] == list).map(key => key.split("+")[1]);
+                            return <List key={list} listTitle={list} cardIds={cardIds}/>;
                       }) : ""
                 }
                 {   lists?.length ? lists.map((list) => {
