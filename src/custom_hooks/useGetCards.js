@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import getFromLocalForage from "../local_forage_integration/getFromLocalForage";
 
-const useGetCards = (cardKey, listParent) => {
+const useGetCards = (cardKey, listParent, dependency = []) => {
     const [cardFromStorage, setCardFromStorage] = useState({});
     console.log("(cardKey, listParent) => ", cardKey, listParent);
     useEffect(() => {
@@ -11,7 +11,7 @@ const useGetCards = (cardKey, listParent) => {
             else console.log("Card was not found here :(");
         }
         requestCards();
-    }, []);
+    }, dependency);
 
     return [cardFromStorage];
 };

@@ -37,3 +37,13 @@
     float: left;
     align-self: flex-end;
 }
+
+#abbr-title-card{
+    border-bottom: none;
+    cursor: inherit;
+    text-decoration: none;
+}
+
+.delete-button{
+    max-height: 25px;
+}

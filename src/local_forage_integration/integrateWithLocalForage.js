@@ -19,7 +19,7 @@ export default async function integrateWithLocalForage(card) {
             }
             await localForage.setItem(`${listParent}+${cardKey}`, card);
 
-            const val = await localForage.getItem(`${listParent}+${cardKey}`, card);
+            const val = await localForage.getItem(`${listParent}+${cardKey}`);
             console.log(val);
         }
     } catch (err) {

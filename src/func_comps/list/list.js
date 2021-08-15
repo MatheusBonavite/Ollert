@@ -28,12 +28,6 @@ const List = React.memo(({ listTitle, cardIds }) => {
     const [cardItems, setCardItems] = useState([]);
     const storageCards = [];
 
-    function removeCard(cardKey){
-        setCardItems(
-            cardItems.filter(cardId => cardId != cardKey)
-        )
-    }
-
     cardIds?.length && cardIds.forEach(cardId =>{
         cardCounterCache();
         const [cardFromStorage] = useGetCards(cardId, listTitle);
@@ -60,7 +54,9 @@ const List = React.memo(({ listTitle, cardIds }) => {
                                     fullDescription={v?.fullDescription}
                                     priority={v?.priority}
                                     timeEstimated={v?.timeEstimated}
-                                    removable={removeCard}
+                                    cardItems = {cardItems}
+                                    setCardItems={setCardItems}
+                                    storageCards = {storageCards}
                                 ></MCard>
                             );
                         })
@@ -73,7 +69,9 @@ const List = React.memo(({ listTitle, cardIds }) => {
                                     listParent={listTitle}
                                     cardKey={v}
                                     key={v}
-                                    removable={removeCard}
+                                    cardItems = {cardItems}
+                                    setCardItems={setCardItems}
+                                    storageCards = {storageCards}
                                 ></MCard>
                             );
                         })

@@ -5,12 +5,12 @@ import SeeModal from "../modals/see_card_modal/SeeModal";
 import EditModal from "../modals/edit_card_modal/EditModal";
 import ListDropdown from "../dropdowns/ListDropdown";
 import integrateWithLocalForage from "../../local_forage_integration/integrateWithLocalForage";
+import removeFromLocalForage from "../../local_forage_integration/removeFromLocalForage";
 
 // eslint-disable-next-line no-unused-vars
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import "./cardStyle.css";
 import BlogSticky from "./BlogStickies.jpg";
-let cardListCache = [];
 
 class MCard extends Component {
     state = {
@@ -23,19 +23,20 @@ class MCard extends Component {
         deadline: this.props.deadline || "xx/xx/xxxx",
         timeEstimated: this.props.timeEstimated || "N/A",
         listParent: this.props.listParent || "N/A",
+        setCardItems: this.props.setCardItems || function(){console.log("Error in setCardItems")},
+        cardItems: this.props.cardItems || function(){console.log("Error in cardItems")},
+        storageCards: this.props.storageCards || function(){console.log("Error in storageCards")},
     };
 
     componentDidMount() {
         if(this?.props){
-            cardListCache.push({
+            integrateWithLocalForage({
                 title: this.props.title,
                 description: this.props.description,
                 cardKey: this.props.cardKey,
                 listParent: this.props.listParent,
             });
-            integrateWithLocalForage(this.props);
         }
-        console.log("cardsListCache >>> ", cardListCache);
     }
 
     priorityMatcher(priority) {
@@ -65,6 +66,16 @@ class MCard extends Component {
         integrateWithLocalForage(props);
     }
 
+    removeCard(cardItems, setCardItems, cardKey, storageCards, listParent){
+        setCardItems(
+            cardItems.filter(cardId => cardId != cardKey)
+        );
+        storageCards = storageCards.filter(card => card?.cardKey == cardKey);
+        console.log("Filtering storageCards ===> ", storageCards);
+        storageCards.forEach(card => removeFromLocalForage(listParent, card?.cardKey));
+        location.reload();
+    }
+
     render() {
         const {
             title,
@@ -75,8 +86,11 @@ class MCard extends Component {
             deadline,
             timeEstimated,
             listParent,
+            setCardItems,
+            cardItems,
+            storageCards
         } = this.state;
-        console.log("Parametros >> ", this.state);
+
         return (
             <>
                 <div className={`card ${listParent}`} id={"card " + cardKey}>
@@ -92,7 +106,7 @@ class MCard extends Component {
                             <span className="content-title activator grey-text text-darken-4">
                                 <div className="card-title">
                                     <p className="card-title-priority">
-                                        <abbs title={`Priority: ${priority}`}>
+                                        <abbr title={`Priority: ${priority}`}>
                                             <i
                                                 className="material-icons"
                                                 data-target="priority_dropdown"
@@ -100,17 +114,20 @@ class MCard extends Component {
                                                 {this.priorityMatcher(priority) ||
                                                     "looks_4"}
                                             </i>
-                                        </abbs>
-                                        {title}
+                                        </abbr>
+                                        <abbr id="abbr-title-card"title={`${title}`}>
+                                            {title}
+                                        </abbr>
                                     </p>
                                 </div>
                             </span>
                         </div>
+
                         <div className="card-title-description">
                             <p className="card-title-description">{description}</p>
                         </div>
 
-                        {/* Watch Modal Trigger*/}
+                        {/* Watch Modal */}
                         <abbr className="modal-trigger-abbr" title="More info!">
                             <a className="modal-trigger" href="#getInfo">
                                 <span className="material-icons pin">
@@ -118,16 +135,16 @@ class MCard extends Component {
                                 </span>
                             </a>
                         </abbr>
-                        {/* End of Watch Modal Trigger*/}
+                        {/* End of Watch Modal */}
 
-                        {/* Edit Modal Trigger*/}
+                        {/* Edit Modal */}
                         <EditModal
                             id={"editInfo"}
                             cardHandler={this.handleCardState.bind(this)}
                             listParent={listParent}
                             cardKey={cardKey}
                         />
-                        {/* End of Edit Modal Trigger*/}
+                        {/* End of Edit Modal */}
 
                         <abbr
                             className="deadline-range"
@@ -143,6 +160,14 @@ class MCard extends Component {
                             title={`Time to Complete: ${timeEstimated}hrs`}
                         >
                             <span className="material-icons pin">av_timer</span>
+                        </abbr>
+
+                        <abbr
+                            className="deadline-range"
+                            title={`Delete Card!`}
+                            onClick={() => this.removeCard(cardItems, setCardItems, cardKey, storageCards, listParent)}
+                        >
+                            <span className="material-icons pin">delete</span>
                         </abbr>
                     </div>
                     <SeeModal id={"getInfo"} />
