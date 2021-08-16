@@ -12,7 +12,7 @@ class EditModal extends Component {
     }
 
     render() {
-        const { cardHandler, id, listParent, cardKey } = this.props;
+        const { cardHandler, listParent, cardKey } = this.props;
 
         return (
             <>

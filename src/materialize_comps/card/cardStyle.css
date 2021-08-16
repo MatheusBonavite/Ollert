@@ -1,17 +1,60 @@
 .card{
-    border-radius: 10px;
-    margin: 20px;
-    width: 250px;
-    height: 250px;
-    overflow: hidden;
+    border-radius: 10px !important;
+    margin: 15px !important;
+    width: 250px !important;
+    height: 250px !important;
+    overflow: hidden !important;
 }
 
 .card-content{
-    display:flex;
-    flex-wrap: wrap;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display:flex !important;
+    flex-wrap: wrap !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    padding: 14px !important;
+}
+
+.card-title{
+    max-height: 60px !important;
+    text-align: center !important;
+}
+
+.marked-task a{
+    border-radius: 37px !important;
+    margin: 5px !important;
+    background-color: #fff !important;
+    height: 34px !important;
+    line-height: 30px !important;
+    padding: 0px 1rem !important;
+}
+
+.marked-task.not_started a{
+    color: orange !important;
+    border: 2px solid orange !important;
+}
+
+.marked-task.in_progress a{
+    color: #1ac0ea !important;
+    border: 2px solid #1ac0ea !important;
+}
+
+.marked-task.done a{
+    color: lightgreen !important;
+    border: 2px solid lightgreen !important;
+}
+
+.marked-task.closed a{
+    color:  crimson !important;
+    border: 2px solid crimson !important;
+}
+
+abbr{
+    max-height: 40px;
+}
+
+.material-icons{
+    margin-top: 5px !important;
 }
 
 .card-title-priority {
@@ -38,10 +81,10 @@
     align-self: flex-end;
 }
 
-#abbr-title-card{
-    border-bottom: none;
-    cursor: inherit;
-    text-decoration: none;
+.abbr-title-card{
+    border-bottom: none !important;
+    cursor: inherit !important;
+    text-decoration: none !important;
 }
 
 .delete-button{

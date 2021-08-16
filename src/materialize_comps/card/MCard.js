@@ -23,21 +23,7 @@ class MCard extends Component {
         deadline: this.props.deadline || "xx/xx/xxxx",
         timeEstimated: this.props.timeEstimated || "N/A",
         listParent: this.props.listParent || "N/A",
-        setCardItems:
-            this.props.setCardItems ||
-            function () {
-                console.log("Error in setCardItems");
-            },
-        cardItems:
-            this.props.cardItems ||
-            function () {
-                console.log("Error in cardItems");
-            },
-        storageCards:
-            this.props.storageCards ||
-            function () {
-                console.log("Error in storageCards");
-            },
+        taskStatus: this.props.taskStatus || "Not started"
     };
 
     componentDidMount() {
@@ -60,6 +46,16 @@ class MCard extends Component {
         };
         if (priority) return priorityMatcherObj[priority];
         return priorityMatcherObj;
+    }
+
+    statusMatcher(status){
+        const statusMatch = {
+            "Not started": "not_started",
+            "In Progress": "in_progress",
+            "Done": "done",
+            "Closed": "closed",
+        };
+        if (status) return statusMatch[status];
     }
 
     handleCardState(props) {
@@ -93,9 +89,7 @@ class MCard extends Component {
             deadline,
             timeEstimated,
             listParent,
-            setCardItems,
-            cardItems,
-            storageCards,
+            taskStatus
         } = this.state;
 
         return (
@@ -108,11 +102,14 @@ class MCard extends Component {
                             alt="officeSticky"
                         />
                     </div>
+                    <div className={`marked-task ${this.statusMatcher(taskStatus)}`}>
+                        <a class="waves-effect waves-light btn">{taskStatus}</a>
+                    </div>
                     <div className="card-content">
                         <div className="card-title-priority">
                             <span className="content-title activator grey-text text-darken-4">
                                 <div className="card-title">
-                                    <p className="card-title-priority">
+                                    
                                         <abbr title={`Priority: ${priority}`}>
                                             <i
                                                 className="material-icons"
@@ -124,12 +121,12 @@ class MCard extends Component {
                                             </i>
                                         </abbr>
                                         <abbr
-                                            id="abbr-title-card"
+                                            className="abbr-title-card"
                                             title={`${title}`}
                                         >
                                             {title}
                                         </abbr>
-                                    </p>
+
                                 </div>
                             </span>
                         </div>
@@ -140,19 +137,17 @@ class MCard extends Component {
                             </p>
                         </div>
 
-                        {/* Watch Modal */}
-                        <abbr className="modal-trigger-abbr" title="More info!">
-                            <a className="modal-trigger" href="#getInfo">
-                                <span className="material-icons pin">
-                                    remove_red_eye
-                                </span>
-                            </a>
-                        </abbr>
-                        {/* End of Watch Modal */}
+                        {/* See Modal */}
+                        <SeeModal
+                            title = {title}
+                            description = {description}
+                            fullDescription = {fullDescription}
+                            cardKey = {cardKey}
+                        />
+                        {/* End of See Modal */}
 
                         {/* Edit Modal */}
                         <EditModal
-                            id={"editInfo"}
                             cardHandler={this.handleCardState.bind(this)}
                             listParent={listParent}
                             cardKey={cardKey}
@@ -188,7 +183,6 @@ class MCard extends Component {
                             <span className="material-icons pin">delete</span>
                         </abbr>
                     </div>
-                    <SeeModal id={"getInfo"} />
                 </div>
             </>
         );
