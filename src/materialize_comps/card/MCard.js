@@ -29,17 +29,22 @@ class MCard extends Component {
 
     async componentDidMount() {
         if (this?.props) {
-            const fromLocal = await getFromLocalForage(this.props.cardKey, this.props.listParent);
+            const fromLocal = await getFromLocalForage(
+                this.props.cardKey,
+                this.props.listParent
+            );
             console.log("fromLocal >>> ", fromLocal);
             integrateWithLocalForage({
                 title: this.props.title || fromLocal?.title,
                 description: this.props.description || fromLocal?.description,
                 cardKey: this.props.cardKey,
                 listParent: this.props.listParent,
-                fullDescription: this.props.fullDescription || fromLocal?.fullDescription,
+                fullDescription:
+                    this.props.fullDescription || fromLocal?.fullDescription,
                 priority: this.props.priority || fromLocal?.priority,
                 deadline: this.props.deadline || fromLocal?.deadline,
-                timeEstimated: this.props.timeEstimated || fromLocal?.timeEstimated,
+                timeEstimated:
+                    this.props.timeEstimated || fromLocal?.timeEstimated,
                 taskStatus: this.props.taskStatus || fromLocal?.taskStatus,
             });
         }
@@ -116,10 +121,12 @@ class MCard extends Component {
                     </div>
                     <div
                         className={`marked-task ${this.statusMatcher(
-                            taskStatus
+                            taskStatus || "Not started"
                         )}`}
                     >
-                        <a className="waves-effect waves-light btn">{taskStatus}</a>
+                        <a className="waves-effect waves-light btn">
+                            {taskStatus || "Not started"}
+                        </a>
                     </div>
                     <div className="card-content">
                         <div className="card-title-priority">
@@ -164,6 +171,13 @@ class MCard extends Component {
                             cardHandler={this.handleCardState.bind(this)}
                             listParent={listParent}
                             cardKey={cardKey}
+                            title={title}
+                            description={description}
+                            fullDescription={fullDescription}
+                            priority={priority}
+                            deadline={deadline}
+                            timeEstimated={timeEstimated}
+                            taskStatus={taskStatus}
                         />
                         {/* End of Edit Modal */}
 

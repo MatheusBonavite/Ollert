@@ -37,8 +37,10 @@ class CardEditForm extends Component {
                 cardKey: cardKey,
                 listParent: this.props.listParent,
                 taskStatus: Array.from(
-                    document.querySelectorAll(`[name='group+${cardKey}']:checked`)
-                ).map(v => v?.nextSibling?.innerText || "Not started")[0]
+                    document.querySelectorAll(
+                        `[name='group+${cardKey}']:checked`
+                    )
+                ).map((v) => v?.nextSibling?.innerText || "Not started")[0],
             };
             cardHandler(updated_card);
         };
@@ -50,7 +52,16 @@ class CardEditForm extends Component {
     }
 
     render() {
-        const { cardHandler, cardKey } = this.props;
+        const { 
+            cardHandler,
+            cardKey,
+            title,
+            description,
+            fullDescription,
+            deadline,
+            timeEstimated,
+            taskStatus
+        } = this.props;
         console.log("Render cardKey ===> ", cardKey);
         return (
             <div className="row">
@@ -61,6 +72,7 @@ class CardEditForm extends Component {
                                 id={`card_title+${cardKey}`}
                                 type="text"
                                 className="validate"
+                                defaultValue = {title}
                             />
                             <label htmlFor={`card_title+${cardKey}`}>
                                 Card Title
@@ -71,6 +83,7 @@ class CardEditForm extends Component {
                                 id={`small_description+${cardKey}`}
                                 type="text"
                                 className="validate"
+                                defaultValue = {description}
                             />
                             <label htmlFor={`small_description+${cardKey}`}>
                                 Card Short Description
@@ -83,6 +96,7 @@ class CardEditForm extends Component {
                             <textarea
                                 id={`description+${cardKey}`}
                                 className="materialize-textarea"
+                                defaultValue = {fullDescription}
                             ></textarea>
                             <label htmlFor={`description+${cardKey}`}>
                                 Description
@@ -97,6 +111,7 @@ class CardEditForm extends Component {
                                 id={`get_deadline+${cardKey}`}
                                 type="text"
                                 className="datepicker"
+                                defaultValue = {deadline}
                             />
                             <label htmlFor={`get_deadline+${cardKey}`}>
                                 Deadline
@@ -120,6 +135,7 @@ class CardEditForm extends Component {
                                     min="1"
                                     max="40"
                                     className="active"
+                                    defaultValue={timeEstimated != "N/A" ? timeEstimated : 0}
                                 />
                             </p>
                             <label htmlFor={`to_complete+${cardKey}`}>
@@ -132,21 +148,37 @@ class CardEditForm extends Component {
                         Task Status:
                         <p>
                             <label>
-                                <input className="with-gap" name={`group+${cardKey}`} type="radio"  />
+                                <input
+                                    className="with-gap"
+                                    name={`group+${cardKey}`}
+                                    type="radio"
+                                />
                                 <span>Not started</span>
                             </label>
                             <label>
-                                <input className="with-gap" name={`group+${cardKey}`} type="radio"  />
+                                <input
+                                    className="with-gap"
+                                    name={`group+${cardKey}`}
+                                    type="radio"
+                                />
                                 <span>In Progress</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input className="with-gap" name={`group+${cardKey}`} type="radio"  />
+                                <input
+                                    className="with-gap"
+                                    name={`group+${cardKey}`}
+                                    type="radio"
+                                />
                                 <span>Done</span>
                             </label>
                             <label>
-                                <input className="with-gap" name={`group+${cardKey}`} type="radio"  />
+                                <input
+                                    className="with-gap"
+                                    name={`group+${cardKey}`}
+                                    type="radio"
+                                />
                                 <span>Closed</span>
                             </label>
                         </p>

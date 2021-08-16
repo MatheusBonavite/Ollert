@@ -12,7 +12,18 @@ class EditModal extends Component {
     }
 
     render() {
-        const { cardHandler, listParent, cardKey } = this.props;
+        const {
+            cardHandler,
+            listParent,
+            cardKey,
+            title,
+            description,
+            fullDescription,
+            priority,
+            deadline,
+            timeEstimated,
+            taskStatus,
+        } = this.props;
 
         return (
             <>
@@ -27,6 +38,13 @@ class EditModal extends Component {
                             cardHandler={cardHandler}
                             listParent={listParent}
                             cardKey={cardKey}
+                            title={title}
+                            description={description}
+                            fullDescription={fullDescription}
+                            priority={priority}
+                            deadline={deadline}
+                            timeEstimated={timeEstimated}
+                            taskStatus={taskStatus}
                         />
                     </div>
                 </div>
