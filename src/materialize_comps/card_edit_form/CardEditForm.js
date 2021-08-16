@@ -37,8 +37,8 @@ class CardEditForm extends Component {
                 cardKey: cardKey,
                 listParent: this.props.listParent,
                 taskStatus: Array.from(
-                    document.querySelectorAll("[name='group+78l2xpkkoi']:checked")
-                ).map(v => v?.nextSibling?.innerText || "Not Started")[0]
+                    document.querySelectorAll(`[name='group+${cardKey}']:checked`)
+                ).map(v => v?.nextSibling?.innerText || "Not started")[0]
             };
             cardHandler(updated_card);
         };

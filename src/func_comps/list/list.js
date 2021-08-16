@@ -85,6 +85,7 @@ const List = React.memo(({ listTitle, cardIds }) => {
                                     cardItems={cardItems}
                                     setCardItems={setCardItems}
                                     storageCards={storageCards}
+                                    taskStatus={v?.taskStatus}
                                 ></MCard>
                             );
                         })}

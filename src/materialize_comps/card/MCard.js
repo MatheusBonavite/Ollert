@@ -5,6 +5,7 @@ import SeeModal from "../modals/see_card_modal/SeeModal";
 import EditModal from "../modals/edit_card_modal/EditModal";
 import ListDropdown from "../dropdowns/ListDropdown";
 import integrateWithLocalForage from "../../local_forage_integration/integrateWithLocalForage";
+import getFromLocalForage from "../../local_forage_integration/getFromLocalForage";
 import removeFromLocalForage from "../../local_forage_integration/removeFromLocalForage";
 
 // eslint-disable-next-line no-unused-vars
@@ -26,13 +27,20 @@ class MCard extends Component {
         taskStatus: this.props.taskStatus || "Not started",
     };
 
-    componentDidMount() {
+    async componentDidMount() {
         if (this?.props) {
+            const fromLocal = await getFromLocalForage(this.props.cardKey, this.props.listParent);
+            console.log("fromLocal >>> ", fromLocal);
             integrateWithLocalForage({
-                title: this.props.title,
-                description: this.props.description,
+                title: this.props.title || fromLocal?.title,
+                description: this.props.description || fromLocal?.description,
                 cardKey: this.props.cardKey,
                 listParent: this.props.listParent,
+                fullDescription: this.props.fullDescription || fromLocal?.fullDescription,
+                priority: this.props.priority || fromLocal?.priority,
+                deadline: this.props.deadline || fromLocal?.deadline,
+                timeEstimated: this.props.timeEstimated || fromLocal?.timeEstimated,
+                taskStatus: this.props.taskStatus || fromLocal?.taskStatus,
             });
         }
     }
@@ -49,13 +57,16 @@ class MCard extends Component {
     }
 
     statusMatcher(status) {
+        console.log("Status matcher > ", status);
         const statusMatch = {
-            "Not Started": "not_started",
+            "Not started": "not_started",
             "In Progress": "in_progress",
             Done: "done",
             Closed: "closed",
         };
+        console.log("Status matcher > ", statusMatch[status]);
         if (status) return statusMatch[status];
+        else return "not_started";
     }
 
     handleCardState(props) {
