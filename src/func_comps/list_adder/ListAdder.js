@@ -14,10 +14,9 @@ const ListAdder = () => {
     const [gotKeys, uniqueLists, status] = useGetKeys();
 
     function handleClick() {
-        if(uniqueLists.includes(listTitle) || lists.includes(listTitle))
+        if (uniqueLists.includes(listTitle) || lists.includes(listTitle))
             alert("A list with that title already exists!");
-        else if (listTitle)
-            setLists([...lists, listTitle]);
+        else if (listTitle) setLists([...lists, listTitle]);
     }
 
     if (status != "unloaded") {

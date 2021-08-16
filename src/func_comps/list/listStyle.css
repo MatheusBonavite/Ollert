@@ -12,6 +12,11 @@
     cursor: pointer;
 }
 
+.info-list.material-icons.pin{
+    margin-top: 0;
+    float: right;
+}
+
 .delete-list.material-icons.pin{
     margin-top: 0;
     float: right;

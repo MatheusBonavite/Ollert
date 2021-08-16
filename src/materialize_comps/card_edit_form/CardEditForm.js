@@ -52,7 +52,7 @@ class CardEditForm extends Component {
     }
 
     render() {
-        const { 
+        const {
             cardHandler,
             cardKey,
             title,
@@ -60,7 +60,7 @@ class CardEditForm extends Component {
             fullDescription,
             deadline,
             timeEstimated,
-            taskStatus
+            taskStatus,
         } = this.props;
         console.log("Render cardKey ===> ", cardKey);
         return (
@@ -72,10 +72,13 @@ class CardEditForm extends Component {
                                 id={`card_title+${cardKey}`}
                                 type="text"
                                 className="validate"
-                                defaultValue = {title}
+                                defaultValue={title}
                                 placeholder=""
                             />
-                            <label className="active" htmlFor={`card_title+${cardKey}`}>
+                            <label
+                                className="active"
+                                htmlFor={`card_title+${cardKey}`}
+                            >
                                 Card Title
                             </label>
                         </div>
@@ -84,10 +87,13 @@ class CardEditForm extends Component {
                                 id={`small_description+${cardKey}`}
                                 type="text"
                                 className="validate"
-                                defaultValue = {description}
+                                defaultValue={description}
                                 placeholder=""
                             />
-                            <label className="active" htmlFor={`small_description+${cardKey}`}>
+                            <label
+                                className="active"
+                                htmlFor={`small_description+${cardKey}`}
+                            >
                                 Card Short Description
                             </label>
                         </div>
@@ -98,10 +104,13 @@ class CardEditForm extends Component {
                             <textarea
                                 id={`description+${cardKey}`}
                                 className="materialize-textarea"
-                                defaultValue = {fullDescription}
+                                defaultValue={fullDescription}
                                 placeholder=""
                             ></textarea>
-                            <label className="active" htmlFor={`description+${cardKey}`}>
+                            <label
+                                className="active"
+                                htmlFor={`description+${cardKey}`}
+                            >
                                 Description
                             </label>
                         </div>
@@ -114,10 +123,13 @@ class CardEditForm extends Component {
                                 id={`get_deadline+${cardKey}`}
                                 type="text"
                                 className="datepicker"
-                                defaultValue = {deadline}
+                                defaultValue={deadline}
                                 placeholder=""
                             />
-                            <label className="active" htmlFor={`get_deadline+${cardKey}`}>
+                            <label
+                                className="active"
+                                htmlFor={`get_deadline+${cardKey}`}
+                            >
                                 Deadline
                             </label>
                         </div>
@@ -139,7 +151,11 @@ class CardEditForm extends Component {
                                     min="1"
                                     max="40"
                                     className="active"
-                                    defaultValue={timeEstimated != "N/A" ? timeEstimated : 0}
+                                    defaultValue={
+                                        timeEstimated != "N/A"
+                                            ? timeEstimated
+                                            : 0
+                                    }
                                 />
                             </p>
                             <label htmlFor={`to_complete+${cardKey}`}>

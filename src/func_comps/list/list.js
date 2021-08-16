@@ -10,6 +10,7 @@ import MCard from "../../materialize_comps/card/MCard";
 import useGetCards from "../../custom_hooks/useGetCards";
 import localForage from "localforage";
 import returnAvailableKeys from "../../local_forage_integration/returnAvailableKeys";
+import InfoListModal from "../../materialize_comps/modals/list_info_modal/InfoListModal";
 
 var cardCounterCache = cardCounter();
 function cardCounter() {
@@ -67,6 +68,12 @@ const List = React.memo(({ listTitle, cardIds }) => {
                         >
                             delete
                         </span>
+                    </abbr>
+                    <abbr title="Info!">
+                        <InfoListModal
+                            listTitle={listTitle}
+                            cards={[...cardItems, ...storageCards]}
+                        />
                     </abbr>
                     <hr />
                     {storageCards?.length != 0 &&
