@@ -73,8 +73,9 @@ class CardEditForm extends Component {
                                 type="text"
                                 className="validate"
                                 defaultValue = {title}
+                                placeholder=""
                             />
-                            <label htmlFor={`card_title+${cardKey}`}>
+                            <label className="active" htmlFor={`card_title+${cardKey}`}>
                                 Card Title
                             </label>
                         </div>
@@ -84,8 +85,9 @@ class CardEditForm extends Component {
                                 type="text"
                                 className="validate"
                                 defaultValue = {description}
+                                placeholder=""
                             />
-                            <label htmlFor={`small_description+${cardKey}`}>
+                            <label className="active" htmlFor={`small_description+${cardKey}`}>
                                 Card Short Description
                             </label>
                         </div>
@@ -97,8 +99,9 @@ class CardEditForm extends Component {
                                 id={`description+${cardKey}`}
                                 className="materialize-textarea"
                                 defaultValue = {fullDescription}
+                                placeholder=""
                             ></textarea>
-                            <label htmlFor={`description+${cardKey}`}>
+                            <label className="active" htmlFor={`description+${cardKey}`}>
                                 Description
                             </label>
                         </div>
@@ -112,8 +115,9 @@ class CardEditForm extends Component {
                                 type="text"
                                 className="datepicker"
                                 defaultValue = {deadline}
+                                placeholder=""
                             />
-                            <label htmlFor={`get_deadline+${cardKey}`}>
+                            <label className="active" htmlFor={`get_deadline+${cardKey}`}>
                                 Deadline
                             </label>
                         </div>
