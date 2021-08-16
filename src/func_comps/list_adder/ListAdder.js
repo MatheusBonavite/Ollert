@@ -11,10 +11,9 @@ const listTitleCache = new Set();
 const ListAdder = () => {
     const [lists, setLists] = useState([]);
     const [listTitle, setListTitle] = useState("");
-    const [gotKeys, uniqueLists, status ] = useGetKeys();
+    const [gotKeys, uniqueLists, status] = useGetKeys();
 
     function handleClick() {
-
         if (listTitle) {
             setLists([...lists, listTitle]);
         }
@@ -22,33 +21,54 @@ const ListAdder = () => {
 
     if (status != "unloaded") {
         return (
-            <>
-                {   uniqueLists?.length ? uniqueLists.map((list) => {
-                            let cardIds = gotKeys.filter(key => key.split("+")[0] == list).map(key => key.split("+")[1]);
-                            return <List key={list} listTitle={list} cardIds={cardIds}/>;
-                      }) : ""
-                }
-                {   lists?.length ? lists.map((list) => {
-                          return <List key={list} listTitle={list} />;
-                      }) : ""
-                }
-                <div className="get_list_name">
-                    <input
-                        type="text"
-                        id="list_title"
-                        onChange={(event) => setListTitle(event.target.value)}
-                    />
-                    <i
-                        className="material-icons right"
-                        onClick={() => {
-                            handleClick();
-                            listTitleCache.add(...lists);
-                        }}
-                    >
-                        airplay
-                    </i>
-                </div>
-            </>
+            <div className="adder-container">
+                <>
+                    {uniqueLists?.length
+                        ? uniqueLists.map((list) => {
+                              let cardIds = gotKeys
+                                  .filter((key) => key.split("+")[0] == list)
+                                  .map((key) => key.split("+")[1]);
+                              return (
+                                  <List
+                                      key={list}
+                                      listTitle={list}
+                                      cardIds={cardIds}
+                                      keys={gotKeys}
+                                  />
+                              );
+                          })
+                        : ""}
+                    {lists?.length
+                        ? lists.map((list) => {
+                              return (
+                                  <List
+                                      key={list}
+                                      listTitle={list}
+                                      keys={gotKeys}
+                                  />
+                              );
+                          })
+                        : ""}
+                    <div className="get_list_name">
+                        <input
+                            type="text"
+                            id="list_title"
+                            onChange={(event) =>
+                                setListTitle(event.target.value)
+                            }
+                        />
+                        <i
+                            className="material-icons right"
+                            onClick={() => {
+                                handleClick();
+                                listTitleCache.add(...lists);
+                            }}
+                        >
+                            airplay
+                        </i>
+                    </div>
+                </>
+            </div>
         );
     }
 

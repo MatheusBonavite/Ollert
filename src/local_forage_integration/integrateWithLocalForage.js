@@ -3,7 +3,7 @@ import localForage from "localforage";
 export default async function integrateWithLocalForage(card) {
     const { cardKey, listParent } = card;
     try {
-        if(cardKey && listParent) {
+        if (cardKey && listParent) {
             const doesKeyExists = await localForage.getItem("keys");
             if (!doesKeyExists?.length) {
                 await localForage.setItem("keys", [`${listParent}+${cardKey}`]);

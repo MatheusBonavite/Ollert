@@ -11,3 +11,8 @@
 .card_adder{
     cursor: pointer;
 }
+
+.delete-list.material-icons.pin{
+    margin-top: 0;
+    float: right;
+}

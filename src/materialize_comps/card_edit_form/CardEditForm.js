@@ -23,11 +23,17 @@ class CardEditForm extends Component {
             event.preventDefault();
             const updated_card = {
                 title: document.getElementById(`card_title+${cardKey}`).value,
-                description: document.getElementById(`small_description+${cardKey}`).value,
-                fullDescription: document.getElementById(`description+${cardKey}`).value,
+                description: document.getElementById(
+                    `small_description+${cardKey}`
+                ).value,
+                fullDescription: document.getElementById(
+                    `description+${cardKey}`
+                ).value,
                 priority: document.getElementById(`priority+${cardKey}`).value,
-                deadline: document.getElementById(`get_deadline+${cardKey}`).value,
-                timeEstimated: document.getElementById(`to_complete+${cardKey}`).value,
+                deadline: document.getElementById(`get_deadline+${cardKey}`)
+                    .value,
+                timeEstimated: document.getElementById(`to_complete+${cardKey}`)
+                    .value,
                 cardKey: cardKey,
                 listParent: this.props.listParent,
             };
@@ -53,7 +59,9 @@ class CardEditForm extends Component {
                                 type="text"
                                 className="validate"
                             />
-                            <label htmlFor={`card_title+${cardKey}`}>Card Title</label>
+                            <label htmlFor={`card_title+${cardKey}`}>
+                                Card Title
+                            </label>
                         </div>
                         <div className="input-field col s6">
                             <input
@@ -73,7 +81,9 @@ class CardEditForm extends Component {
                                 id={`description+${cardKey}`}
                                 className="materialize-textarea"
                             ></textarea>
-                            <label htmlFor={`description+${cardKey}`}>Description</label>
+                            <label htmlFor={`description+${cardKey}`}>
+                                Description
+                            </label>
                         </div>
                     </div>
 
@@ -85,7 +95,9 @@ class CardEditForm extends Component {
                                 type="text"
                                 className="datepicker"
                             />
-                            <label htmlFor={`get_deadline+${cardKey}`}>Deadline</label>
+                            <label htmlFor={`get_deadline+${cardKey}`}>
+                                Deadline
+                            </label>
                         </div>
                         <div className="input-field col s6">
                             <ListDropdown

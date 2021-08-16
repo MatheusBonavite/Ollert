@@ -7,15 +7,17 @@
 import React, { useState } from "react";
 import "./listStyle.css";
 import MCard from "../../materialize_comps/card/MCard";
-import useGetCards from "../../custom_hooks/useGetCards"
+import useGetCards from "../../custom_hooks/useGetCards";
+import localForage from "localforage";
+import returnAvailableKeys from "../../local_forage_integration/returnAvailableKeys";
 
 var cardCounterCache = cardCounter();
 function cardCounter() {
-    let cardId = '';
+    let cardId = "";
     let keeper = [];
     return function () {
         let aux = (Math.random() + 1).toString(36).substring(2);
-        while(keeper.find(value => value == aux)){
+        while (keeper.find((value) => value == aux)) {
             aux = (Math.random() + 1).toString(36).substring(2);
         }
         keeper.push(aux);
@@ -24,24 +26,45 @@ function cardCounter() {
     };
 }
 
+async function removeList(listTitle) {
+    let keys = await returnAvailableKeys();
+    keys
+    .filter(key => key.split("+")[0] == listTitle)
+    .forEach(async function (keyToDispose){
+        let [listParent, cardKey] = [keyToDispose.split("+")[0], keyToDispose.split("+")[1]];
+        await localForage.removeItem(`${listParent}+${cardKey}`);
+    })
+    await localForage.setItem("keys", keys.filter(key => key.split("+")[0] != listTitle));
+    location.reload();
+}
+
+
 const List = React.memo(({ listTitle, cardIds }) => {
     const [cardItems, setCardItems] = useState([]);
     const storageCards = [];
 
-    cardIds?.length && cardIds.forEach(cardId =>{
-        cardCounterCache();
-        const [cardFromStorage] = useGetCards(cardId, listTitle);
-        storageCards.push(cardFromStorage);
-    });
+    cardIds?.length &&
+        cardIds.forEach((cardId) => {
+            cardCounterCache();
+            const [cardFromStorage] = useGetCards(cardId, listTitle);
+            storageCards.push(cardFromStorage);
+        });
 
     return (
         <div className="cards_parent list">
-            <div id="card-list" className="list">
+            <div className="list">
                 <div>
-                    <p>{listTitle}</p>
+                    {listTitle}
+                    <abbr title="Delete list!">
+                        <span
+                            className="delete-list material-icons pin"
+                            onClick={() => removeList(listTitle)}
+                        >
+                            delete
+                        </span>
+                    </abbr>
                     <hr />
-                    {
-                        storageCards?.length != 0 &&
+                    {storageCards?.length != 0 &&
                         storageCards.map((v) => {
                             return (
                                 <MCard
@@ -54,33 +77,29 @@ const List = React.memo(({ listTitle, cardIds }) => {
                                     fullDescription={v?.fullDescription}
                                     priority={v?.priority}
                                     timeEstimated={v?.timeEstimated}
-                                    cardItems = {cardItems}
+                                    cardItems={cardItems}
                                     setCardItems={setCardItems}
-                                    storageCards = {storageCards}
+                                    storageCards={storageCards}
                                 ></MCard>
                             );
-                        })
-                    }
-                    {
-                        cardItems?.length != 0 &&
+                        })}
+                    {cardItems?.length != 0 &&
                         cardItems.map((v) => {
                             return (
                                 <MCard
                                     listParent={listTitle}
                                     cardKey={v}
                                     key={v}
-                                    cardItems = {cardItems}
+                                    cardItems={cardItems}
                                     setCardItems={setCardItems}
-                                    storageCards = {storageCards}
+                                    storageCards={storageCards}
                                 ></MCard>
                             );
-                        })
-                    }
-                    
+                        })}
                 </div>
                 <div>
                     <a
-                        id="card_adder"
+                        className="card_adder"
                         onClick={() => {
                             setCardItems([...cardItems, cardCounterCache()]);
                         }}

@@ -3,10 +3,16 @@
     align-items: flex-start;
     border-radius: 10px;
     margin: 20px;
-    margin-top: 27px;
+    margin-top: 4px;
     max-width: 250px;
     max-height: 250px;
     overflow: hidden;
+}
+
+.adder-container {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: nowrap;
 }
 
 .get_list_name input[type="text"]:focus {

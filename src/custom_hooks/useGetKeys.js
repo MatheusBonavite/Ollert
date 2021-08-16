@@ -9,20 +9,19 @@ const useGetKeys = () => {
     useEffect(() => {
         async function requestKeys() {
             const keysVal = await returnAvailableKeys();
-            if (keysVal?.length){
+            if (keysVal?.length) {
                 setKeys(keysVal);
                 setUniqueLists(
                     Array.from(
-                        new Set(keysVal.map(key => key.split("+")[0]))
-                    ).filter(value => Boolean(value))
-                )
-            }
-            else setKeys([]);
+                        new Set(keysVal.map((key) => key.split("+")[0]))
+                    ).filter((value) => Boolean(value))
+                );
+            } else setKeys([]);
 
             setStatus("loaded");
         }
         requestKeys();
-        console.log('i fire once');
+        console.log("i fire once");
     }, []);
 
     return [keys, uniqueLists, status];

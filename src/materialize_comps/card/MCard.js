@@ -23,13 +23,25 @@ class MCard extends Component {
         deadline: this.props.deadline || "xx/xx/xxxx",
         timeEstimated: this.props.timeEstimated || "N/A",
         listParent: this.props.listParent || "N/A",
-        setCardItems: this.props.setCardItems || function(){console.log("Error in setCardItems")},
-        cardItems: this.props.cardItems || function(){console.log("Error in cardItems")},
-        storageCards: this.props.storageCards || function(){console.log("Error in storageCards")},
+        setCardItems:
+            this.props.setCardItems ||
+            function () {
+                console.log("Error in setCardItems");
+            },
+        cardItems:
+            this.props.cardItems ||
+            function () {
+                console.log("Error in cardItems");
+            },
+        storageCards:
+            this.props.storageCards ||
+            function () {
+                console.log("Error in storageCards");
+            },
     };
 
     componentDidMount() {
-        if(this?.props){
+        if (this?.props) {
             integrateWithLocalForage({
                 title: this.props.title,
                 description: this.props.description,
@@ -51,7 +63,7 @@ class MCard extends Component {
     }
 
     handleCardState(props) {
-        console.log('Who are props >', props);
+        console.log("Who are props >", props);
         let newState = {
             title: props.title,
             description: props.description,
@@ -66,13 +78,8 @@ class MCard extends Component {
         integrateWithLocalForage(props);
     }
 
-    removeCard(cardItems, setCardItems, cardKey, storageCards, listParent){
-        setCardItems(
-            cardItems.filter(cardId => cardId != cardKey)
-        );
-        storageCards = storageCards.filter(card => card?.cardKey == cardKey);
-        console.log("Filtering storageCards ===> ", storageCards);
-        storageCards.forEach(card => removeFromLocalForage(listParent, card?.cardKey));
+    removeCard(listParent, cardKey) {
+        removeFromLocalForage(listParent, cardKey);
         location.reload();
     }
 
@@ -88,7 +95,7 @@ class MCard extends Component {
             listParent,
             setCardItems,
             cardItems,
-            storageCards
+            storageCards,
         } = this.state;
 
         return (
@@ -111,11 +118,15 @@ class MCard extends Component {
                                                 className="material-icons"
                                                 data-target="priority_dropdown"
                                             >
-                                                {this.priorityMatcher(priority) ||
-                                                    "looks_4"}
+                                                {this.priorityMatcher(
+                                                    priority
+                                                ) || "looks_4"}
                                             </i>
                                         </abbr>
-                                        <abbr id="abbr-title-card"title={`${title}`}>
+                                        <abbr
+                                            id="abbr-title-card"
+                                            title={`${title}`}
+                                        >
                                             {title}
                                         </abbr>
                                     </p>
@@ -124,7 +135,9 @@ class MCard extends Component {
                         </div>
 
                         <div className="card-title-description">
-                            <p className="card-title-description">{description}</p>
+                            <p className="card-title-description">
+                                {description}
+                            </p>
                         </div>
 
                         {/* Watch Modal */}
@@ -165,7 +178,12 @@ class MCard extends Component {
                         <abbr
                             className="deadline-range"
                             title={`Delete Card!`}
-                            onClick={() => this.removeCard(cardItems, setCardItems, cardKey, storageCards, listParent)}
+                            onClick={() =>
+                                this.removeCard(
+                                    listParent,
+                                    cardKey
+                                )
+                            }
                         >
                             <span className="material-icons pin">delete</span>
                         </abbr>

@@ -16,10 +16,7 @@ class EditModal extends Component {
 
         return (
             <>
-                <abbr
-                    className="modal-trigger-abbr"
-                    title="Edit card info!"
-                >
+                <abbr className="modal-trigger-abbr" title="Edit card info!">
                     <a className="modal-trigger" href={`#editInfo${cardKey}`}>
                         <span className="material-icons pin">edit</span>
                     </a>
