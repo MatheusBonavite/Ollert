@@ -14,7 +14,7 @@ class SeeModal extends Component {
             title = "New Card",
             description = `A Small Description for Card!`,
             fullDescription = `A more complete description, following the card we want!`,
-            cardKey
+            cardKey,
         } = this.props;
 
         return (

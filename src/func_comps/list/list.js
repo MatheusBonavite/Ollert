@@ -28,16 +28,21 @@ function cardCounter() {
 
 async function removeList(listTitle) {
     let keys = await returnAvailableKeys();
-    keys
-    .filter(key => key.split("+")[0] == listTitle)
-    .forEach(async function (keyToDispose){
-        let [listParent, cardKey] = [keyToDispose.split("+")[0], keyToDispose.split("+")[1]];
-        await localForage.removeItem(`${listParent}+${cardKey}`);
-    })
-    await localForage.setItem("keys", keys.filter(key => key.split("+")[0] != listTitle));
+    keys.filter((key) => key.split("+")[0] == listTitle).forEach(
+        async function (keyToDispose) {
+            let [listParent, cardKey] = [
+                keyToDispose.split("+")[0],
+                keyToDispose.split("+")[1],
+            ];
+            await localForage.removeItem(`${listParent}+${cardKey}`);
+        }
+    );
+    await localForage.setItem(
+        "keys",
+        keys.filter((key) => key.split("+")[0] != listTitle)
+    );
     location.reload();
 }
-
 
 const List = React.memo(({ listTitle, cardIds }) => {
     const [cardItems, setCardItems] = useState([]);

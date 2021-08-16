@@ -36,6 +36,9 @@ class CardEditForm extends Component {
                     .value,
                 cardKey: cardKey,
                 listParent: this.props.listParent,
+                taskStatus: Array.from(
+                    document.querySelectorAll("[name='group+78l2xpkkoi']:checked")
+                ).map(v => v?.nextSibling?.innerText || "Not Started")[0]
             };
             cardHandler(updated_card);
         };
@@ -124,9 +127,34 @@ class CardEditForm extends Component {
                             </label>
                         </div>
                     </div>
+
+                    <div className="select-status">
+                        Task Status:
+                        <p>
+                            <label>
+                                <input className="with-gap" name={`group+${cardKey}`} type="radio"  />
+                                <span>Not started</span>
+                            </label>
+                            <label>
+                                <input className="with-gap" name={`group+${cardKey}`} type="radio"  />
+                                <span>In Progress</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input className="with-gap" name={`group+${cardKey}`} type="radio"  />
+                                <span>Done</span>
+                            </label>
+                            <label>
+                                <input className="with-gap" name={`group+${cardKey}`} type="radio"  />
+                                <span>Closed</span>
+                            </label>
+                        </p>
+                    </div>
+
                     <button
                         id={`submit_form+${cardKey}`}
-                        className="modal-close btn waves-effect waves-light"
+                        className="modal-close btn waves-effect waves-light submit_form"
                         type="submit"
                         name="action"
                         onClick={(event) => {

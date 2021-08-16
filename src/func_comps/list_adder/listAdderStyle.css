@@ -15,6 +15,10 @@
     flex-wrap: nowrap;
 }
 
+.material-icons.right.adder{
+    margin-top: 25px !important;
+}
+
 .get_list_name input[type="text"]:focus {
     border-bottom: 5px solid #d8f1fa !important;
 }

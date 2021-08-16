@@ -23,7 +23,7 @@ class MCard extends Component {
         deadline: this.props.deadline || "xx/xx/xxxx",
         timeEstimated: this.props.timeEstimated || "N/A",
         listParent: this.props.listParent || "N/A",
-        taskStatus: this.props.taskStatus || "Not started"
+        taskStatus: this.props.taskStatus || "Not started",
     };
 
     componentDidMount() {
@@ -48,12 +48,12 @@ class MCard extends Component {
         return priorityMatcherObj;
     }
 
-    statusMatcher(status){
+    statusMatcher(status) {
         const statusMatch = {
-            "Not started": "not_started",
+            "Not Started": "not_started",
             "In Progress": "in_progress",
-            "Done": "done",
-            "Closed": "closed",
+            Done: "done",
+            Closed: "closed",
         };
         if (status) return statusMatch[status];
     }
@@ -69,6 +69,7 @@ class MCard extends Component {
             timeEstimated: props.timeEstimated,
             listParent: props.listParent,
             cardKey: props.cardKey,
+            taskStatus: props.taskStatus,
         };
         this.setState(newState);
         integrateWithLocalForage(props);
@@ -89,7 +90,7 @@ class MCard extends Component {
             deadline,
             timeEstimated,
             listParent,
-            taskStatus
+            taskStatus,
         } = this.state;
 
         return (
@@ -102,31 +103,32 @@ class MCard extends Component {
                             alt="officeSticky"
                         />
                     </div>
-                    <div className={`marked-task ${this.statusMatcher(taskStatus)}`}>
-                        <a class="waves-effect waves-light btn">{taskStatus}</a>
+                    <div
+                        className={`marked-task ${this.statusMatcher(
+                            taskStatus
+                        )}`}
+                    >
+                        <a className="waves-effect waves-light btn">{taskStatus}</a>
                     </div>
                     <div className="card-content">
                         <div className="card-title-priority">
                             <span className="content-title activator grey-text text-darken-4">
                                 <div className="card-title">
-                                    
-                                        <abbr title={`Priority: ${priority}`}>
-                                            <i
-                                                className="material-icons"
-                                                data-target="priority_dropdown"
-                                            >
-                                                {this.priorityMatcher(
-                                                    priority
-                                                ) || "looks_4"}
-                                            </i>
-                                        </abbr>
-                                        <abbr
-                                            className="abbr-title-card"
-                                            title={`${title}`}
+                                    <abbr title={`Priority: ${priority}`}>
+                                        <i
+                                            className="material-icons"
+                                            data-target="priority_dropdown"
                                         >
-                                            {title}
-                                        </abbr>
-
+                                            {this.priorityMatcher(priority) ||
+                                                "looks_4"}
+                                        </i>
+                                    </abbr>
+                                    <abbr
+                                        className="abbr-title-card"
+                                        title={`${title}`}
+                                    >
+                                        {title}
+                                    </abbr>
                                 </div>
                             </span>
                         </div>
@@ -139,10 +141,10 @@ class MCard extends Component {
 
                         {/* See Modal */}
                         <SeeModal
-                            title = {title}
-                            description = {description}
-                            fullDescription = {fullDescription}
-                            cardKey = {cardKey}
+                            title={title}
+                            description={description}
+                            fullDescription={fullDescription}
+                            cardKey={cardKey}
                         />
                         {/* End of See Modal */}
 
@@ -173,12 +175,7 @@ class MCard extends Component {
                         <abbr
                             className="deadline-range"
                             title={`Delete Card!`}
-                            onClick={() =>
-                                this.removeCard(
-                                    listParent,
-                                    cardKey
-                                )
-                            }
+                            onClick={() => this.removeCard(listParent, cardKey)}
                         >
                             <span className="material-icons pin">delete</span>
                         </abbr>

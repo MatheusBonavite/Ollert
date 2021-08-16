@@ -11,3 +11,7 @@
     flex-basis:100%;
     text-align: center;
 }
+
+.input-field>label {
+    margin-top: 10px;
+}

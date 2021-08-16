@@ -58,7 +58,7 @@ const ListAdder = () => {
                             }
                         />
                         <i
-                            className="material-icons right"
+                            className="material-icons right adder"
                             onClick={() => {
                                 handleClick();
                                 listTitleCache.add(...lists);
