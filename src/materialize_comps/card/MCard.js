@@ -33,7 +33,6 @@ class MCard extends Component {
                 this.props.cardKey,
                 this.props.listParent
             );
-            console.log("fromLocal >>> ", fromLocal);
             integrateWithLocalForage({
                 title: this.props.title || fromLocal?.title,
                 description: this.props.description || fromLocal?.description,

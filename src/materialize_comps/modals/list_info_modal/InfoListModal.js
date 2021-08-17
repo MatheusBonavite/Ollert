@@ -53,7 +53,6 @@ class InfoListModal extends Component {
         });
 
         this.setState({ bars: JSON.parse(JSON.stringify(statusCounter)) });
-        console.log(this.state.bars);
         this.resetStatusCounter();
     }
 

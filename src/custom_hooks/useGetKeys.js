@@ -21,7 +21,6 @@ const useGetKeys = () => {
             setStatus("loaded");
         }
         requestKeys();
-        console.log("i fire once");
     }, []);
 
     return [keys, uniqueLists, status];

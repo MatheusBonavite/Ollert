@@ -5,7 +5,6 @@ export default async function returnAvailableKeys() {
         const val = await localForage.getItem("keys");
         return val;
     } catch (err) {
-        console.log(err);
         return err;
     }
 }

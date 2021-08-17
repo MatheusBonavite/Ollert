@@ -6,7 +6,6 @@ export default async function getFromLocalForage(cardKey, listParent) {
         if (val) return val;
         else return null;
     } catch (err) {
-        console.log(err);
         return err;
     }
 }
