@@ -17,6 +17,13 @@ const ListAdder = () => {
         if (uniqueLists.includes(listTitle) || lists.includes(listTitle))
             alert("A list with that title already exists!");
         else if (listTitle) setLists([...lists, listTitle]);
+
+        if(uniqueLists.length +lists.length >= 3){
+            let auxVal = Number(document.body.style.minWidth.split("px")[0])
+            auxVal += 1000;
+            document.body.style.minWidth = auxVal + "px";
+            console.log(document.body.style.minWidth);
+        }
     }
 
     if (status != "unloaded") {

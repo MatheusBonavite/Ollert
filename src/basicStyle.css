@@ -8,3 +8,8 @@
     flex-direction: row;
     justify-content: flex-start;
 }
+
+html, body, .root {
+    min-width: 1500px;
+}
+
